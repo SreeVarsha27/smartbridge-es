@@ -1,0 +1,42 @@
+/*
+ * POTENTIOMETERMOTOR.c
+ *
+ * Created: 6/11/2019 11:47:25 AM
+ * Author : T.SREE VARSHA
+ */ 
+
+
+#define F_CPU 16000000UL
+#include "avr/io.h"
+#include <util/delay.h>
+void PWM_init()
+{
+	TCCR0=(1<<WGM00)|(1<<WGM01)|(1<<COM01)|(1<<CS00);
+	DDRB=(1<<PB3);
+}
+
+
+	int main(void)
+{
+ 
+	    DDRA=0X00;//input
+	  int16_t COUNTA=0;
+	    
+	    _delay_ms(50);
+		PWM_init();
+	    
+	 ADMUX|=(1<<REFS0)|(1<<REFS1);
+	    ADCSRA|=(1<<ADEN)|(1<<ADATE)|(1<<ADPS0)|(1<<ADPS1)|(1<<ADPS2);
+		COUNTA=0;
+		
+		ADCSRA|=(1<<ADSC);
+
+    while (1) 
+    {
+		COUNTA=ADC/4;
+		OCR0=COUNTA;
+		
+		
+    }
+}
+

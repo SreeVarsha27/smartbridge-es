@@ -1,0 +1,44 @@
+/*
+ * MOTOR2.c
+ *
+ * Created: 6/11/2019 10:31:37 AM
+ * Author : T.SREE VARSHA
+ */ 
+
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+  DDRB=0XFF;
+  DDRC=0X00;
+  PORTB=0X00;
+  
+    while (1) 
+    {
+		if((PINC&(1<<PC0))==0)
+		{
+			PORTB|=(1<<PB0);
+			PORTB&=~(1<<PB1);
+				
+			}
+			if ((PINC&(1<<PC1))==0)
+			{
+				PORTB&=~(1<<PB0);
+				PORTB|=(1<<PB1);
+			}
+			else
+			{
+					
+	PORTB=0x00	;		
+			}
+	}
+		
+		
+		
+		
+		
+    }
+}
+

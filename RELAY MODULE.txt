@@ -1,0 +1,53 @@
+/*
+ * irsensor.c
+ *
+ * Created: 6/11/2019 2:25:17 PM
+ * Author : T.SREE VARSHA
+ */ 
+
+#ifndef F_CPU
+
+#define F_CPU 16000000UL
+
+#endif
+
+#include <avr/io.h>
+
+#include <util/delay.h>
+
+
+
+int main(void)
+
+{
+
+	DDRD|=(1<<PD0);
+
+	DDRB&=~(1<<PB0);
+
+	while (1)
+
+	{
+
+		if((PINB&(1<<PB0))==0)
+
+		{
+
+			PORTD|=(1<<PD0);
+
+			_delay_ms(2000);
+
+			PORTD&=~(1<<PD0);
+
+		}
+
+	}
+
+}
+
+
+
+
+
+
+

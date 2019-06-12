@@ -1,0 +1,47 @@
+
+program for bottom to top LED blinking using button
+
+/*
+ * buttonandled.c
+ *
+ * Created: 07-06-2019 10:11:01
+ * Author : T.SREE VARSHA
+ */ 
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+    DDRC=0xFF;
+	DDRD&=~(1<<PD0);
+    while (1) 
+    {
+		if((PIND &(1<<PD0))==0)
+		   {
+			   PORTC=0x01;
+			   _delay_ms(800);
+			   PORTC=0x03;
+			   _delay_ms(700);
+			   PORTC=0x07;
+			   _delay_ms(600);
+			   PORTC=0x0F;
+			   _delay_ms(500);
+			   PORTC=0x1F;
+			   _delay_ms(400);
+			   PORTC=0x3F;
+			   _delay_ms(300);
+			   PORTC=0x7F;
+			   _delay_ms(200);
+			   PORTC=0xFF;
+			   _delay_ms(100);
+			    PORTC=0x00;
+			   _delay_ms(1000);
+			       }
+    }
+
+}
+

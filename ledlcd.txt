@@ -1,0 +1,72 @@
+program for LCD using LED
+
+/*
+ * LCDONOFF.c
+ *
+ * Created: 07-06-2019 14:08:27
+ * Author : T.SREE VARSHA
+ */ 
+
+#include <avr/io.h>
+#define F_CPU 16000000UL
+#include <util/delay.h>
+#define  RS 7
+#define E 5
+void send_command(unsigned char command);
+void send_character(unsigned char character);
+
+
+int main(void)
+{
+	DDRA=
+    DDRC=0xFF;
+    DDRD=0xFF;
+    DDRB=0xFF;
+    while (1) 
+    {
+	
+		send_command(0x01);
+		send_command(0x38);
+		send_command(0x0E);
+	
+		
+		PORTB=0xFF;
+		send_character(0x44);
+		send_character(0x4E);
+		_delay_ms(400);
+		
+		send_command(0x01);
+		send_command(0x38);
+		send_command(0x0E);
+
+		
+		PORTB=0x00;
+		send_character(0x44);
+		send_character(0x46);
+		send_character(0x46);
+		_delay_ms(400);
+			
+		
+    }
+	
+}
+void send_command(unsigned char command)
+{
+	
+	PORTC=command;
+	PORTD&=~(1<<RS);
+	PORTD|=(1<<E);
+	_delay_ms(400);
+	PORTD&=~(1<<E);
+	PORTC=0;
+}
+void send_character(unsigned char character)
+{
+	
+	PORTC=character;
+	PORTD|=(1<<RS);
+	PORTD|=(1<<E);
+	_delay_ms(400);
+	PORTD&=~(1<<E);
+	PORTC=0;
+}
